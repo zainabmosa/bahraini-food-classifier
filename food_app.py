@@ -32,8 +32,13 @@ st.markdown("""<div class="hero"><h1>🇧🇭 Bahraini Food AI</h1><p>Discover t
 st.markdown("### 📸 Upload a Food Image")
 st.write("Upload a clear photo of a Bahraini food item and let the AI identify it.")
 
-uploaded_file = st.file_uploader("Choose an image", type=["jpg","jpeg","png"], label_visibility="collapsed")
+input_method = st.radio("Choose input method:", ["📷 Take a Photo", "🖼️ Upload an Image"], horizontal=True)
 
+if input_method == "📷 Take a Photo":
+    uploaded_file = st.camera_input("Take a photo of your Bahraini food")
+else:
+    uploaded_file = st.file_uploader("Choose an image", type=["jpg","jpeg","png"], label_visibility="collapsed")
+    
 if uploaded_file is not None:
     image = Image.open(uploaded_file).convert("RGB")
     col1, col2 = st.columns([1.15,1])
