@@ -192,8 +192,4 @@ The main goal of this project is to demonstrate how **Computer Vision and Machin
 
 **Zainab Moosa**
 
-Data Science / Machine Learning Project
-
-🇧🇭 **Bahraini Food AI**
-
-[1]: https://github.com/streamlit/docs/blob/main/content/develop/api-reference/_index.md?utm_source=chatgpt.com "docs/content/develop/api-reference/_index.md at main · streamlit/docs · GitHub"
+Data Science
