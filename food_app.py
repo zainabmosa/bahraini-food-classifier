@@ -192,10 +192,7 @@ if uploaded_file is not None:
 
         st.markdown("### 🖼️ Your Image")
 
-        st.image(
-            image,
-            use_container_width=True
-        )
+        st.image(image,use_container_width=True)
 
     # ---------------- PREDICTION ----------------
 
@@ -296,36 +293,10 @@ else:
 
         with columns[i % 4]:
 
-            st.markdown(
-                f"""
-                <div class="food-card">
-
-                    <div style="font-size:2rem;">
-                        {emoji}
-                    </div>
-
-                    <b>{name}</b>
-
-                </div>
-                """,
-                unsafe_allow_html=True
-            )
+            st.markdown(f"""<div class="food-card"><div style="font-size:2rem;">{emoji}</div><b>{name}</b></div>""",unsafe_allow_html=True)
 
 # --------------------------------------------------
 # FOOTER
 # --------------------------------------------------
 
-st.markdown(
-    """
-    <div class="footer">
-
-    🇧🇭 Made with AI • Bahraini Food Classification
-
-    <br>
-
-    Traditional food • Machine Learning • Computer Vision
-
-    </div>
-    """,
-    unsafe_allow_html=True
-)
+st.markdown("""<div class="footer">🇧🇭 Made with AI • Bahraini Food Classification<br>Traditional food • Machine Learning • Computer Vision</div>""",unsafe_allow_html=True)
