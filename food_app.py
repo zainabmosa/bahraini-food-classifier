@@ -214,24 +214,7 @@ if uploaded_file is not None:
 
         # Main prediction card
 
-        st.markdown(
-            f"""
-            <div class="prediction-card">
-
-                <div>🏆 Most Likely Dish</div>
-
-                <div class="prediction-name">
-                    {predicted_class}
-                </div>
-
-                <div class="confidence">
-                    Confidence: <b>{confidence:.2%}</b>
-                </div>
-
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
+        st.markdown(f"""<div class="prediction-card"><div>🏆 Most Likely Dish</div><div class="prediction-name">{predicted_class}</div><div class="confidence">Confidence: <b>{confidence:.2%}</b></div></div>""",unsafe_allow_html=True)
 
         st.progress(
             confidence,
@@ -242,24 +225,29 @@ if uploaded_file is not None:
 # TOP 3 PREDICTIONS
 # --------------------------------------------------
 
-        st.markdown("### 📊 Top Predictions")
+st.markdown("### 📊 Top Predictions")
 
-        top_k = min(3, len(probs.data))
+probabilities = probs.data.cpu().numpy()
 
-        top_probs, top_indices = probs.topk(top_k)
+top_indices = probabilities.argsort()[::-1][:3]
 
-        for prob, index in zip(top_probs.tolist(), top_indices.tolist()):
+for index in top_indices:
 
-            class_name = results[0].names[int(index)]
+    probability = float(probabilities[index])
 
-            percentage = float(prob) * 100
+    class_name = results[0].names[int(index)]
 
-            st.write(
-                f"**{class_name.capitalize()}** — "
-                f"{percentage:.2f}%"
-            )
+    percentage = probability * 100
 
-            st.progress(float(prob))
+    st.write(
+        f"**{class_name.capitalize()}** — "
+        f"{percentage:.2f}%"
+    )
+
+    st.progress(
+        probability,
+        text=f"{percentage:.1f}%"
+    )
 
 # --------------------------------------------------
 # INFORMATION SECTION
@@ -269,10 +257,7 @@ else:
 
     st.markdown("---")
 
-    st.markdown(
-        '<div class="section-title">🍴 Explore Bahraini Cuisine</div>',
-        unsafe_allow_html=True
-    )
+    st.markdown('<div class="section-title">🍴 Explore Bahraini Cuisine</div>',unsafe_allow_html=True)
 
     col1, col2, col3, col4 = st.columns(4)
 
